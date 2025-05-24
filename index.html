@@ -146,6 +146,15 @@
     margin-bottom: 0.8rem;
   }
 
+  /* Visitor Counter Section */
+  .visitor-counter {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    color: var(--primary-color);
+    font-weight: 700;
+  }
+
   /* Creations Section */
   section#creations {
     margin-bottom: 2.5rem;
@@ -242,23 +251,24 @@
     line-height: 1.5;
   }
 
-  .btn-creations-page {
+  button.btn-creations-page {
     display: inline-block;
     margin-top: 2rem;
-    padding: 0.8rem 2rem;
+    padding: 0.9rem 2.5rem;
     font-weight: 700;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     color: white;
     background-color: var(--primary-color);
+    border: none;
     border-radius: 35px;
     box-shadow: 0 8px 25px var(--shadow);
+    cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    text-decoration: none;
   }
 
-  .btn-creations-page:hover,
-  .btn-creations-page:focus {
+  button.btn-creations-page:hover,
+  button.btn-creations-page:focus {
     background-color: var(--primary-color-hover);
     box-shadow: 0 12px 40px var(--primary-color-hover);
     outline: none;
@@ -362,9 +372,13 @@
     <img src="https://cdn.discordapp.com/attachments/1360685490222796852/1360691890785095960/BlueBackground.png?ex=6832c0d3&amp;is=68316f53&amp;hm=6bcf097a2e2e21b498bc411988bc3cdd03eb1f9a01bffb548bb1a09aef5897a6&amp;" alt="Profile photo of Bonded" />
     <div class="about-content">
       <h2>About Me</h2>
-      <p>Hello! I'm Bonded, a passionate Roblox developer. i love making roblox games without any reason i can make a obby game to a completely iother game style. i learn fast and know fast. </p>
-      <p>I'm always free (not free when i have exams) and i'm a professional builder (3y+) and ui designer (2y+) (if you want know more on me click on "see all my creaton"), i'm still learning how to script but i think in 1 year i will be ready for been a scripter. </p>
+      <p>Hello! I'm Bonded, a passionate Roblox developer. I love making Roblox games without any reason; I can make an obby game to a completely different game style. I learn fast and know fast.</p>
+      <p>I'm always free (not free when I have exams) and I'm a professional builder (3y+) and UI designer (2y+) (if you want to know more about me, click on "See all my creations"), I'm still learning how to script but I think in 1 year I will be ready to be a scripter.</p>
     </div>
+  </section>
+
+  <section class="visitor-counter" id="visitorCounter">
+    Visitors: <span id="visitorCount">0</span>
   </section>
 
   <section id="creations" tabindex="0" aria-label="Roblox Creations">
@@ -374,8 +388,8 @@
       <a class="card" href="https://create.roblox.com/talent/creators/2816691154" target="_blank" rel="noopener noreferrer" aria-label="Visit my Roblox Creator page - Creation 1">
         <img src="https://tr.rbxcdn.com/180DAY-f698232a22371c9eed5f15506e58dac3/768/432/Image/Webp/noFilter" alt="Screenshot of Roblox Creation 1" />
         <div class="card-content">
-          <h3>Simulator Game (Builder, Ui Designer)</h3>
-          <p>So in this game i have made the map. I have ask other devs to make me this game. and i made the map with low poly assets clean and nice. I have made the ui too with my own icons and backgrounds. click here for seen more...</p>
+          <h3>Simulator Game (Builder, UI Designer)</h3>
+          <p>In this game, I made the map. I asked other devs to help me create this game. I designed the map with low poly assets, clean and nice. I also created the UI with my own icons and backgrounds. Click here to learn more...</p>
         </div>
       </a>
 
@@ -383,7 +397,7 @@
         <img src="https://tr.rbxcdn.com/180DAY-509a32a40b07c7b6c66c5ff4234c8927/768/432/Image/Webp/noFilter" alt="Screenshot of Roblox Creation 2" />
         <div class="card-content">
           <h3>Roleplay Game (Builder)</h3>
-          <p>So in this game i have made the map (still not done) like realistic style with nice light you can click on it for know more...</p>
+          <p>In this game, I created the map (still not done) in a realistic style with nice lighting. Click here to learn more...</p>
         </div>
       </a>
 
@@ -391,13 +405,13 @@
         <img src="https://tr.rbxcdn.com/180DAY-523d32ae32aecb25959d13b0fc7c0a59/768/432/Image/Webp/noFilter" alt="Screenshot of Roblox Creation 3" />
         <div class="card-content">
           <h3>Donation Game (Builder)</h3>
-          <p>So in this game i have made the map with low poly assets. the map is on a island with water around. Click here for seen more</p>
+          <p>In this game, I created the map with low poly assets. The map is on an island surrounded by water. Click here to learn more.</p>
         </div>
       </a>
 
     </div>
 
-    <a href="https://create.roblox.com/talent/creators/2816691154" target="_blank" rel="noopener noreferrer" class="btn-creations-page" aria-label="See all my creations on Roblox">See all my creations on Roblox</a>
+    <button class="btn-creations-page" aria-label="See all my creations on Roblox" id="btnSeeAllCreations">See all my creations on Roblox</button>
   </section>
 
   <section id="contact" tabindex="0" aria-label="Contact Information">
@@ -414,6 +428,38 @@
 <footer>
   &copy; 2025 Bonded. All rights reserved.
 </footer>
+
+<script>
+  // Smooth scroll for internal links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  // Lazy loading images
+  document.querySelectorAll('img').forEach(img => {
+    img.loading = 'lazy';
+  });
+
+  // Visitor counter using localStorage to show number of visits from this browser
+  function updateVisitorCount() {
+    let visits = localStorage.getItem('visits') || 0;
+    visits = parseInt(visits) + 1;
+    localStorage.setItem('visits', visits);
+    document.getElementById('visitorCount').innerText = visits.toLocaleString();
+  }
+  updateVisitorCount();
+
+  // Button click opens Roblox creator page
+  const btn = document.getElementById('btnSeeAllCreations');
+  btn.addEventListener('click', () => {
+    window.open('https://create.roblox.com/talent/creators/2816691154', '_blank', 'noopener');
+  });
+</script>
 </body>
 </html>
 
